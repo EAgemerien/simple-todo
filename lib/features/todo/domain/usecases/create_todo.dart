@@ -2,7 +2,7 @@
 import 'package:equatable/equatable.dart';
 
 import 'package:simple_todo/core/utils/typedef.dart';
-import 'package:simple_todo/core/utils/usecase.dart';
+import 'package:simple_todo/core/usecases/usecase.dart';
 import 'package:simple_todo/features/todo/domain/repositories/todo_repo.dart';
 
 class CreateTodo extends UsecaseWithParams<void, CreateTodoParams> {
