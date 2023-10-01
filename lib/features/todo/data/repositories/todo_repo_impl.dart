@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:fpdart/fpdart.dart';
+import 'package:simple_todo/core/error/failure.dart';
 import 'package:simple_todo/core/utils/typedef.dart';
 import 'package:simple_todo/features/todo/data/sources/local/local_data_source.dart';
 import 'package:simple_todo/features/todo/domain/entities/todo.dart';
@@ -24,13 +25,21 @@ class TodoRepoImpl implements TodoRepo {
     required String task,
     required bool isCompleted,
   }) async {
-    final result = await localDataSource.createTodo(
-      id: id,
-      createdAt: createdAt,
-      task: task,
-      isCompleted: isCompleted,
-    );
-    return result;
+    try {
+      await localDataSource.createTodo(
+        id: id,
+        createdAt: createdAt,
+        task: task,
+        isCompleted: isCompleted,
+      );
+      return const Right(null);
+    } catch (e) {
+      return Left(
+        CacheFailure(
+          message: e.toString(),
+        ),
+      );
+    }
   }
 
   @override
