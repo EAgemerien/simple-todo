@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+// import 'package:simple_todo/features/todo/data/models/local/local_model.dart';
 import 'package:simple_todo/features/todo/presentation/screens/home.dart';
+// import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // await Hive.initFlutter();
+
+  // Hive.registerAdapter(TodoLocalModelAdapter());
+  // await Hive.openBox<TodoLocalModel>('todos');
   runApp(const MyApp());
 }
 

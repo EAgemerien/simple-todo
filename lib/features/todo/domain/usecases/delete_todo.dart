@@ -7,7 +7,5 @@ class DeleteTodo extends UsecaseWithParams<void, String> {
   DeleteTodo(this._repo);
 
   @override
-  ResultFuture<void> call(String params) async => _repo.deleteTodo(
-        id: params,
-      );
+  ResultFuture<void> call(String params) async => _repo.deleteTodo(id: params);
 }
