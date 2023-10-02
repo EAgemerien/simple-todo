@@ -44,22 +44,46 @@ class TodoRepoImpl implements TodoRepo {
 
   @override
   ResultFutureVoid deleteTodo({required String id}) async {
-    final result = await localDataSource.deleteTodo(id: id);
-    return result;
+    try {
+      await localDataSource.deleteTodo(id: id);
+      return const Right(null);
+    } catch (e) {
+      return Left(
+        CacheFailure(
+          message: e.toString(),
+        ),
+      );
+    }
   }
 
   @override
   ResultFutureVoid editTodo({required String id, required String task}) async {
-    final result = await localDataSource.editTodo(
-      id: id,
-      task: task,
-    );
-    return result;
+    try {
+      await localDataSource.editTodo(
+        id: id,
+        task: task,
+      );
+      return const Right(null);
+    } catch (e) {
+      return Left(
+        CacheFailure(
+          message: e.toString(),
+        ),
+      );
+    }
   }
 
   @override
   ResultFuture<List<Todo>> getTodos() async {
-    final result = await localDataSource.getTodos();
-    return Right(result);
+    try {
+      final result = await localDataSource.getTodos();
+      return Right(result);
+    } catch (e) {
+      return Left(
+        CacheFailure(
+          message: e.toString(),
+        ),
+      );
+    }
   }
 }
