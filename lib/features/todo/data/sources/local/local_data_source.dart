@@ -30,8 +30,6 @@ class LocalDataSourceImpl implements LocalDataSource {
   late Box<TodoLocalModel> _todoModel;
 
   Future<void> init() async {
-    Hive.registerAdapter(TodoLocalModelAdapter());
-
     _todoModel = await Hive.openBox<TodoLocalModel>('todos');
   }
 

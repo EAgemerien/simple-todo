@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
-// import 'package:simple_todo/features/todo/data/models/local/local_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:simple_todo/core/services/dependency_injection.dart';
+import 'package:simple_todo/features/todo/data/models/local/local_model.dart';
 import 'package:simple_todo/features/todo/presentation/screens/home.dart';
-// import 'package:hive_flutter/hive_flutter.dart';
+import 'package:simple_todo/features/todo/presentation/todo_bloc/todo_bloc.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // await Hive.initFlutter();
+  await Hive.initFlutter();
+  Hive.registerAdapter(TodoLocalModelAdapter());
 
-  // Hive.registerAdapter(TodoLocalModelAdapter());
-  // await Hive.openBox<TodoLocalModel>('todos');
+  await Hive.openBox<TodoLocalModel>('todos');
+
+  await init();
+
   runApp(const MyApp());
 }
 
@@ -19,13 +25,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return BlocProvider(
+      create: (context) => sl<TodoBloc>(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: const HomeScreen(),
       ),
-      home: const HomeScreen(),
     );
   }
 }
