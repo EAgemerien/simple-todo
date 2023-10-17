@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<TodoBloc>(),
+      create: (context) => sl<TodoBloc>()..add(GetAllTodosEvent()),
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(

@@ -91,6 +91,10 @@ class LocalDataSourceImpl implements LocalDataSource {
   @override
   Future<List<Todo>> getTodos() async {
     final todos = _todoModel.values;
-    return todos.toList();
+    var unsorted = todos.toList();
+
+    unsorted.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+    return unsorted;
   }
 }
+//  filtered.sort((a, b) => a['timestamp'].compareTo(b['timestamp']));

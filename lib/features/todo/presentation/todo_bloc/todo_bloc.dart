@@ -46,7 +46,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
         }, (r) {
           emit(const TodoSuccessfulState('Todo Added Succefully'));
         });
-        emit(TodoInitialState());
+        add(GetAllTodosEvent());
       },
     );
 
@@ -57,7 +57,9 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
         final todos = await _getTodos();
         todos.fold(
           (e) => emit(TodoErrorState(e.message)),
-          (todos) => emit(TodoLoadedState(todos)),
+          (todos) => emit(
+            TodoLoadedState(todos),
+          ),
         );
       },
     );
@@ -70,6 +72,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
           (e) => emit(TodoErrorState(e.message)),
           (_) => emit(const TodoSuccessfulState('Completed Todo successfully')),
         );
+        add(GetAllTodosEvent());
       },
     );
 
@@ -87,6 +90,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
           (e) => emit(TodoErrorState(e.message)),
           (_) => emit(const TodoSuccessfulState('Editted Todo successfully')),
         );
+        add(GetAllTodosEvent());
       },
     );
 
@@ -99,6 +103,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
           (e) => emit(TodoErrorState(e.message)),
           (_) => emit(const TodoSuccessfulState('Deleted Todo successfully')),
         );
+        add(GetAllTodosEvent());
       },
     );
   }

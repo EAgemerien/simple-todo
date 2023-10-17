@@ -15,7 +15,7 @@ class TodoLoadedState extends TodoState {
   const TodoLoadedState(this.todos);
 
   @override
-  List<Object> get props => todos.map((todo) => todo.id).toList();
+  List<Object> get props => [todos];
 }
 
 class TodoSuccessfulState extends TodoState {

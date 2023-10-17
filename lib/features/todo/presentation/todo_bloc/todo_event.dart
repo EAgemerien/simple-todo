@@ -55,9 +55,4 @@ class CompleteTodoEvent extends TodoEvent {
   List<Object> get props => [id];
 }
 
-class GetAllTodosEvent extends TodoEvent {
-  final Todo todo;
-  const GetAllTodosEvent({required this.todo});
-  @override
-  List<Object> get props => [todo];
-}
+class GetAllTodosEvent extends TodoEvent {}

@@ -34,13 +34,11 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         builder: (context, state) {
           if (state is TodoLoadingState) {
-            print('loading state');
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
           if (state is TodoLoadedState) {
-            print('loaded state');
             return ListView(
               children: state.todos
                   .map(
