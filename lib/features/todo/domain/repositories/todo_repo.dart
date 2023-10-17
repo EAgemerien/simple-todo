@@ -11,11 +11,6 @@ abstract class TodoRepo {
 
   ResultFuture<List<Todo>> getTodos();
 
-  ResultFutureVoid editTodo({
-    required String id,
-    required String task,
-  });
-
   ResultFutureVoid deleteTodo({
     required String id,
   });

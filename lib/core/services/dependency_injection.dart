@@ -5,7 +5,7 @@ import 'package:simple_todo/features/todo/domain/repositories/todo_repo.dart';
 import 'package:simple_todo/features/todo/domain/usecases/complete_todo.dart';
 import 'package:simple_todo/features/todo/domain/usecases/create_todo.dart';
 import 'package:simple_todo/features/todo/domain/usecases/delete_todo.dart';
-import 'package:simple_todo/features/todo/domain/usecases/edit_todo.dart';
+
 import 'package:simple_todo/features/todo/domain/usecases/get_todos.dart';
 import 'package:simple_todo/features/todo/presentation/todo_bloc/todo_bloc.dart';
 
@@ -25,7 +25,6 @@ Future<void> init() async {
       createTodo: sl(),
       completeTodo: sl(),
       deleteTodo: sl(),
-      editTodo: sl(),
       getTodos: sl(),
     ),
   );
@@ -34,7 +33,6 @@ Future<void> init() async {
   sl.registerLazySingleton(() => CreateTodo(sl()));
   sl.registerLazySingleton(() => CompleteTodo(sl()));
   sl.registerLazySingleton(() => DeleteTodo(sl()));
-  sl.registerLazySingleton(() => EditTodo(sl()));
   sl.registerLazySingleton(() => GetTodos(sl()));
 
   //  Repo

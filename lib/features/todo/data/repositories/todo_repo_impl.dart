@@ -14,8 +14,16 @@ class TodoRepoImpl implements TodoRepo {
 
   @override
   ResultFutureVoid completeTodo({required String id}) async {
-    final result = await localDataSource.completeTodo(id: id);
-    return result;
+    try {
+      await localDataSource.completeTodo(id: id);
+      return const Right(null);
+    } catch (e) {
+      return Left(
+        CacheFailure(
+          message: e.toString(),
+        ),
+      );
+    }
   }
 
   @override
@@ -46,23 +54,6 @@ class TodoRepoImpl implements TodoRepo {
   ResultFutureVoid deleteTodo({required String id}) async {
     try {
       await localDataSource.deleteTodo(id: id);
-      return const Right(null);
-    } catch (e) {
-      return Left(
-        CacheFailure(
-          message: e.toString(),
-        ),
-      );
-    }
-  }
-
-  @override
-  ResultFutureVoid editTodo({required String id, required String task}) async {
-    try {
-      await localDataSource.editTodo(
-        id: id,
-        task: task,
-      );
       return const Right(null);
     } catch (e) {
       return Left(

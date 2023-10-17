@@ -23,18 +23,6 @@ class CreateTodoEvent extends TodoEvent {
   List<Object> get props => [id, createdAt, task, isCompleted];
 }
 
-class EditTodoEvent extends TodoEvent {
-  final String id;
-  final String task;
-  const EditTodoEvent({
-    required this.id,
-    required this.task,
-  });
-
-  @override
-  List<Object> get props => [id, task];
-}
-
 class DeleteTodoEvent extends TodoEvent {
   final String id;
   const DeleteTodoEvent({

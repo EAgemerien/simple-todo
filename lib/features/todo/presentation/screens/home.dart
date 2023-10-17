@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simple_todo/features/todo/presentation/screens/widgets/create_task_widget.dart';
+import 'package:simple_todo/features/todo/presentation/screens/widgets/task_card.dart';
 import 'package:simple_todo/features/todo/presentation/todo_bloc/todo_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -41,16 +42,27 @@ class _HomeScreenState extends State<HomeScreen> {
           if (state is TodoLoadedState) {
             return ListView(
               children: state.todos
-                  .map(
-                    (e) => ListTile(
-                      title: Text(e.task),
-                      subtitle: Text(e.createdAt.toString()),
-                      trailing: Checkbox(
-                        value: e.isCompleted,
-                        onChanged: (val) {},
-                      ),
-                    ),
-                  )
+                  .map((e) => taskCard(
+                            id: e.id,
+                            context: context,
+                            task: e.task,
+                            time: e.createdAt,
+                            isComplete: e.isCompleted,
+                          )
+                      // (e) => ListTile(
+                      //   title: Text(e.task),
+                      //   subtitle: Text(e.createdAt.toString()),
+                      //   trailing: Checkbox(
+                      //     value: e.isCompleted,
+                      //     onChanged: (val) {
+                      //       context
+                      //           .read<TodoBloc>()
+                      //           .add(CompleteTodoEvent(id: e.id));
+                      //       context.read<TodoBloc>().add(GetAllTodosEvent());
+                      //     },
+                      //   ),
+                      // ),
+                      )
                   .toList(),
             );
           }

@@ -12,11 +12,6 @@ abstract class LocalDataSource {
 
   Future<List<Todo>> getTodos();
 
-  Future editTodo({
-    required String id,
-    required String task,
-  });
-
   Future deleteTodo({
     required String id,
   });
@@ -73,22 +68,6 @@ class LocalDataSourceImpl implements LocalDataSource {
   }
 
   @override
-  Future editTodo({required String id, required String task}) async {
-    final todoToEdit = _todoModel.values.firstWhere(
-      (element) => element.id == id,
-    );
-    await _todoModel.put(
-      id,
-      TodoLocalModel(
-        id: todoToEdit.id,
-        createdAt: todoToEdit.createdAt,
-        task: task,
-        isCompleted: todoToEdit.isCompleted,
-      ),
-    );
-  }
-
-  @override
   Future<List<Todo>> getTodos() async {
     final todos = _todoModel.values;
     var unsorted = todos.toList();
@@ -97,4 +76,3 @@ class LocalDataSourceImpl implements LocalDataSource {
     return unsorted;
   }
 }
-//  filtered.sort((a, b) => a['timestamp'].compareTo(b['timestamp']));
